@@ -26,7 +26,8 @@ console = Console()
 def print_score_report(report, format: str = "rich"):
     """打印评分报告"""
     if format == "json":
-        click.echo(report.model_dump_json(indent=2, ensure_ascii=False))
+        # 使用 json.dumps 确保中文正确显示
+        click.echo(json.dumps(report.model_dump(), indent=2, ensure_ascii=False))
         return
     
     # Rich 格式输出
@@ -179,7 +180,7 @@ def score(input_path: str, output_format: str, no_llm: bool, segment_mode: str, 
         # 输出结果
         if output_path:
             Path(output_path).write_text(
-                report.model_dump_json(indent=2, ensure_ascii=False),
+                json.dumps(report.model_dump(), indent=2, ensure_ascii=False),
                 encoding='utf-8'
             )
             console.print(f"[green]结果已保存到: {output_path}[/]")
