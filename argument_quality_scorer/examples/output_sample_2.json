@@ -1,0 +1,171 @@
+{
+  "emotion_score": 15.2,
+  "logic_score": 78.5,
+  "evidence_score": 85.0,
+  "overall_score": 82.7,
+  "score_breakdown": {
+    "logic_contribution": 27.48,
+    "evidence_contribution": 29.75,
+    "emotion_penalty": 4.56,
+    "bonus": 0.0,
+    "penalty": 0.0,
+    "formula": "overall = 0.35*logic + 0.35*evidence - 0.30*emotion + bonus - penalty + 30"
+  },
+  "highlights": [
+    {
+      "span_text": "根据中国人民银行2023年第四季度的货币政策执行报告",
+      "start_char": 0,
+      "end_char": 28,
+      "reason_tag": "has_citation",
+      "is_positive": true
+    },
+    {
+      "span_text": "45%",
+      "start_char": 42,
+      "end_char": 45,
+      "reason_tag": "has_data",
+      "is_positive": true
+    },
+    {
+      "span_text": "68%",
+      "start_char": 125,
+      "end_char": 128,
+      "reason_tag": "has_data",
+      "is_positive": true
+    },
+    {
+      "span_text": "《2023年中国财富管理行业发展报告》",
+      "start_char": 88,
+      "end_char": 108,
+      "reason_tag": "has_citation",
+      "is_positive": true
+    },
+    {
+      "span_text": "中央财经大学",
+      "start_char": 168,
+      "end_char": 174,
+      "reason_tag": "has_specific_fact",
+      "is_positive": true
+    },
+    {
+      "span_text": "23%",
+      "start_char": 218,
+      "end_char": 221,
+      "reason_tag": "has_data",
+      "is_positive": true
+    },
+    {
+      "span_text": "《金融研究》期刊第8期",
+      "start_char": 228,
+      "end_char": 240,
+      "reason_tag": "has_citation",
+      "is_positive": true
+    },
+    {
+      "span_text": "首先",
+      "start_char": 58,
+      "end_char": 60,
+      "reason_tag": "well_structured",
+      "is_positive": true
+    },
+    {
+      "span_text": "其次",
+      "start_char": 158,
+      "end_char": 160,
+      "reason_tag": "well_structured",
+      "is_positive": true
+    },
+    {
+      "span_text": "综上所述",
+      "start_char": 420,
+      "end_char": 424,
+      "reason_tag": "clear_reasoning",
+      "is_positive": true
+    }
+  ],
+  "diagnostics": [
+    {
+      "category": "evidence",
+      "reason_tag": "has_citation",
+      "description": "有具体引用"根据中国人民银行2023年第四季度的货币政策执行报告"",
+      "span_text": "根据中国人民银行2023年第四季度的货币政策执行报告",
+      "start_char": 0,
+      "end_char": 28,
+      "severity": "low",
+      "suggestion": null
+    },
+    {
+      "category": "evidence",
+      "reason_tag": "has_data",
+      "description": "文本包含 12 处数据/数字，增加可核查性",
+      "span_text": "45%",
+      "start_char": 42,
+      "end_char": 45,
+      "severity": "low",
+      "suggestion": null
+    },
+    {
+      "category": "evidence",
+      "reason_tag": "has_specific_fact",
+      "description": "包含具体可核查事实",
+      "span_text": "2022年",
+      "start_char": 175,
+      "end_char": 180,
+      "severity": "low",
+      "suggestion": null
+    }
+  ],
+  "emotion_features": {
+    "positive_count": 3,
+    "negative_count": 2,
+    "emotion_word_count": 5,
+    "extreme_word_count": 0,
+    "exclamation_count": 0,
+    "question_count": 0,
+    "total_chars": 620,
+    "emotion_ratio": 1.61,
+    "top_emotion_words": []
+  },
+  "logic_features": {
+    "detected_fallacies": [],
+    "fallacy_count": 0,
+    "has_clear_claim": true,
+    "has_reasoning": true,
+    "has_conclusion": true,
+    "structure_score": 85.0
+  },
+  "evidence_features": {
+    "data_count": 12,
+    "citation_count": 5,
+    "source_count": 4,
+    "vague_reference_count": 0,
+    "specific_fact_count": 3,
+    "verifiable_ratio": 18.5
+  },
+  "per_segment": [
+    {
+      "segment_index": 0,
+      "segment_text": "根据中国人民银行2023年第四季度的货币政策执行报告，当前我国居民储蓄率约为45%，位居全球前列。",
+      "start_char": 0,
+      "end_char": 48,
+      "emotion_score": 5.0,
+      "logic_score": 60.0,
+      "evidence_score": 90.0,
+      "local_diagnostics": []
+    },
+    {
+      "segment_index": 1,
+      "segment_text": "关于理财教育的价值，我们需要从多个角度来分析。",
+      "start_char": 50,
+      "end_char": 72,
+      "emotion_score": 8.0,
+      "logic_score": 70.0,
+      "evidence_score": 20.0,
+      "local_diagnostics": []
+    }
+  ],
+  "input_text_length": 620,
+  "segment_count": 8,
+  "analysis_mode": "rule_only",
+  "llm_used": false
+}

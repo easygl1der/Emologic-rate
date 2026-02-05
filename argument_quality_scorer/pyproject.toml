@@ -1,0 +1,73 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "argument-quality-scorer"
+version = "0.1.0"
+description = "评估文本论述质量的工具：情绪化/逻辑/证据多维评分"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "ArgumentQualityScorer Team"}
+]
+keywords = ["nlp", "sentiment", "logic", "argumentation", "chinese"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Text Processing :: Linguistic",
+]
+
+dependencies = [
+    "pydantic>=2.0.0",
+    "jieba>=0.42.1",
+    "cnsenti>=0.0.7",
+    "httpx>=0.25.0",
+    "python-dotenv>=1.0.0",
+    "click>=8.1.0",
+    "rich>=13.0.0",
+]
+
+[project.optional-dependencies]
+api = [
+    "fastapi>=0.104.0",
+    "uvicorn>=0.24.0",
+]
+senta = [
+    "paddlepaddle>=2.5.0",
+    "senta>=0.1.0",
+]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+]
+all = [
+    "argument-quality-scorer[api,dev]",
+]
+
+[project.scripts]
+aqs = "argument_quality_scorer.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/your-org/argument-quality-scorer"
+Repository = "https://github.com/your-org/argument-quality-scorer"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["argument_quality_scorer*"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]

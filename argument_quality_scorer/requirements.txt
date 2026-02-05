@@ -1,0 +1,36 @@
+# ArgumentQualityScorer 核心依赖
+# Python >= 3.10
+
+# 数据模型与校验
+pydantic>=2.0.0
+
+# 中文分词
+jieba>=0.42.1
+
+# 情感分析 - 词典法基线
+cnsenti>=0.0.7
+
+# HTTP 客户端（用于 LLM API 调用）
+httpx>=0.25.0
+
+# 环境变量管理
+python-dotenv>=1.0.0
+
+# CLI 工具
+click>=8.1.0
+
+# 美化输出
+rich>=13.0.0
+
+# === 可选依赖 ===
+
+# Web API (可选)
+# fastapi>=0.104.0
+# uvicorn>=0.24.0
+
+# Baidu Senta 情感分析 (可选，需要 PaddlePaddle)
+# paddlepaddle>=2.5.0
+
+# 开发工具 (可选)
+# pytest>=7.4.0
+# pytest-asyncio>=0.21.0
