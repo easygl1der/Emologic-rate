@@ -1,0 +1,239 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ArgumentQualityScorer Report",
+  "description": "文本论述质量评估报告输出格式",
+  "type": "object",
+  "required": [
+    "emotion_score",
+    "logic_score", 
+    "evidence_score",
+    "overall_score",
+    "score_breakdown",
+    "highlights",
+    "diagnostics",
+    "per_segment",
+    "input_text_length",
+    "segment_count",
+    "analysis_mode",
+    "llm_used"
+  ],
+  "properties": {
+    "emotion_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "情绪化得分（0-100，越高越情绪化/主观化）"
+    },
+    "logic_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "逻辑得分（0-100，越高越逻辑清晰/结构完整）"
+    },
+    "evidence_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "证据得分（0-100，越高越可核查/引用充分）"
+    },
+    "overall_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "综合得分（0-100，越高越严谨有据）"
+    },
+    "score_breakdown": {
+      "type": "object",
+      "required": ["logic_contribution", "evidence_contribution", "emotion_penalty", "formula"],
+      "properties": {
+        "logic_contribution": {
+          "type": "number",
+          "description": "逻辑分贡献"
+        },
+        "evidence_contribution": {
+          "type": "number",
+          "description": "证据分贡献"
+        },
+        "emotion_penalty": {
+          "type": "number",
+          "description": "情绪化扣分"
+        },
+        "bonus": {
+          "type": "number",
+          "default": 0,
+          "description": "额外加分"
+        },
+        "penalty": {
+          "type": "number",
+          "default": 0,
+          "description": "额外扣分"
+        },
+        "formula": {
+          "type": "string",
+          "description": "计算公式说明"
+        }
+      }
+    },
+    "highlights": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["span_text", "start_char", "end_char", "reason_tag"],
+        "properties": {
+          "span_text": {
+            "type": "string",
+            "description": "原文片段文本"
+          },
+          "start_char": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "片段起始字符位置"
+          },
+          "end_char": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "片段结束字符位置"
+          },
+          "reason_tag": {
+            "type": "string",
+            "enum": [
+              "emotional_word", "extreme_word", "exclamation", "attack_language", "subjective_claim",
+              "ad_hominem", "appeal_to_authority", "straw_man", "slippery_slope", "hasty_generalization",
+              "false_dilemma", "circular_reasoning", "logic_jump", "missing_premise",
+              "vague_reference", "no_source", "unverifiable", "has_data", "has_citation", "has_specific_fact",
+              "clear_claim", "clear_reasoning", "well_structured"
+            ],
+            "description": "标签类型"
+          },
+          "is_positive": {
+            "type": "boolean",
+            "default": false,
+            "description": "是否为正面标记"
+          }
+        }
+      },
+      "description": "高亮片段数组"
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["category", "reason_tag", "description", "span_text", "start_char", "end_char"],
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": ["emotion", "logic", "evidence"],
+            "description": "诊断类别"
+          },
+          "reason_tag": {
+            "type": "string",
+            "description": "具体标签"
+          },
+          "description": {
+            "type": "string",
+            "description": "诊断描述"
+          },
+          "span_text": {
+            "type": "string",
+            "description": "触发此诊断的原文片段"
+          },
+          "start_char": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "片段起始字符位置"
+          },
+          "end_char": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "片段结束字符位置"
+          },
+          "severity": {
+            "type": "string",
+            "enum": ["low", "medium", "high"],
+            "default": "medium",
+            "description": "严重程度"
+          },
+          "suggestion": {
+            "type": ["string", "null"],
+            "description": "改进建议"
+          }
+        }
+      },
+      "description": "诊断列表（每条必须引用原文片段）"
+    },
+    "emotion_features": {
+      "type": "object",
+      "properties": {
+        "positive_count": {"type": "integer"},
+        "negative_count": {"type": "integer"},
+        "emotion_word_count": {"type": "integer"},
+        "extreme_word_count": {"type": "integer"},
+        "exclamation_count": {"type": "integer"},
+        "question_count": {"type": "integer"},
+        "total_chars": {"type": "integer"},
+        "emotion_ratio": {"type": "number"},
+        "top_emotion_words": {"type": "array", "items": {"type": "string"}}
+      },
+      "description": "情绪化特征详情"
+    },
+    "logic_features": {
+      "type": "object",
+      "properties": {
+        "detected_fallacies": {"type": "array", "items": {"type": "string"}},
+        "fallacy_count": {"type": "integer"},
+        "has_clear_claim": {"type": "boolean"},
+        "has_reasoning": {"type": "boolean"},
+        "has_conclusion": {"type": "boolean"},
+        "structure_score": {"type": "number"}
+      },
+      "description": "逻辑特征详情"
+    },
+    "evidence_features": {
+      "type": "object",
+      "properties": {
+        "data_count": {"type": "integer"},
+        "citation_count": {"type": "integer"},
+        "source_count": {"type": "integer"},
+        "vague_reference_count": {"type": "integer"},
+        "specific_fact_count": {"type": "integer"},
+        "verifiable_ratio": {"type": "number"}
+      },
+      "description": "证据特征详情"
+    },
+    "per_segment": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["segment_index", "segment_text", "start_char", "end_char", "emotion_score", "logic_score", "evidence_score"],
+        "properties": {
+          "segment_index": {"type": "integer"},
+          "segment_text": {"type": "string"},
+          "start_char": {"type": "integer", "minimum": 0},
+          "end_char": {"type": "integer", "minimum": 1},
+          "emotion_score": {"type": "number", "minimum": 0, "maximum": 100},
+          "logic_score": {"type": "number", "minimum": 0, "maximum": 100},
+          "evidence_score": {"type": "number", "minimum": 0, "maximum": 100},
+          "local_diagnostics": {"type": "array", "items": {"type": "object"}}
+        }
+      },
+      "description": "分段评分结果"
+    },
+    "input_text_length": {
+      "type": "integer",
+      "description": "输入文本长度"
+    },
+    "segment_count": {
+      "type": "integer",
+      "description": "段落数量"
+    },
+    "analysis_mode": {
+      "type": "string",
+      "enum": ["rule_only", "llm_only", "hybrid"],
+      "description": "分析模式"
+    },
+    "llm_used": {
+      "type": "boolean",
+      "description": "是否使用了 LLM"
+    }
+  }
+}

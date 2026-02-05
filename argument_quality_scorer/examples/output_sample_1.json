@@ -1,0 +1,122 @@
+{
+  "emotion_score": 72.5,
+  "logic_score": 35.2,
+  "evidence_score": 18.0,
+  "overall_score": 28.6,
+  "score_breakdown": {
+    "logic_contribution": 12.32,
+    "evidence_contribution": 6.3,
+    "emotion_penalty": 21.75,
+    "bonus": 0.0,
+    "penalty": 0.0,
+    "formula": "overall = 0.35*logic + 0.35*evidence - 0.30*emotion + bonus - penalty + 30"
+  },
+  "highlights": [
+    {
+      "span_text": "绝对",
+      "start_char": 89,
+      "end_char": 91,
+      "reason_tag": "extreme_word",
+      "is_positive": false
+    },
+    {
+      "span_text": "所有",
+      "start_char": 45,
+      "end_char": 47,
+      "reason_tag": "extreme_word",
+      "is_positive": false
+    },
+    {
+      "span_text": "骗人",
+      "start_char": 58,
+      "end_char": 60,
+      "reason_tag": "attack_language",
+      "is_positive": false
+    }
+  ],
+  "diagnostics": [
+    {
+      "category": "emotion",
+      "reason_tag": "extreme_word",
+      "description": "使用极端化表述"所有"，可能过于绝对",
+      "span_text": "所有",
+      "start_char": 45,
+      "end_char": 47,
+      "severity": "medium",
+      "suggestion": null
+    },
+    {
+      "category": "logic",
+      "reason_tag": "hasty_generalization",
+      "description": "以偏概全：从少数案例得出普遍结论",
+      "span_text": "所有的理财课程都是骗人的",
+      "start_char": 12,
+      "end_char": 25,
+      "severity": "medium",
+      "suggestion": "建议检查论证逻辑，避免此类推理偏误"
+    },
+    {
+      "category": "evidence",
+      "reason_tag": "vague_reference",
+      "description": "空泛引用"有人说"，未提供具体来源",
+      "span_text": "有人说",
+      "start_char": 156,
+      "end_char": 159,
+      "severity": "medium",
+      "suggestion": "建议提供具体的研究名称、作者、发表时间或机构"
+    },
+    {
+      "category": "evidence",
+      "reason_tag": "no_source",
+      "description": "文本缺乏可核查的证据、数据或引用来源",
+      "span_text": "今天我们来聊聊为什么所有的理财课程都是骗人的！...",
+      "start_char": 0,
+      "end_char": 50,
+      "severity": "medium",
+      "suggestion": "建议添加具体数据、引用来源或可核查的事实"
+    }
+  ],
+  "emotion_features": {
+    "positive_count": 2,
+    "negative_count": 8,
+    "emotion_word_count": 10,
+    "extreme_word_count": 5,
+    "exclamation_count": 8,
+    "question_count": 4,
+    "total_chars": 485,
+    "emotion_ratio": 4.12,
+    "top_emotion_words": ["愤怒", "讽刺", "嘲讽"]
+  },
+  "logic_features": {
+    "detected_fallacies": ["hasty_generalization", "ad_hominem"],
+    "fallacy_count": 2,
+    "has_clear_claim": true,
+    "has_reasoning": false,
+    "has_conclusion": true,
+    "structure_score": 45.0
+  },
+  "evidence_features": {
+    "data_count": 2,
+    "citation_count": 0,
+    "source_count": 0,
+    "vague_reference_count": 1,
+    "specific_fact_count": 0,
+    "verifiable_ratio": 2.5
+  },
+  "per_segment": [
+    {
+      "segment_index": 0,
+      "segment_text": "今天我们来聊聊为什么所有的理财课程都是骗人的！",
+      "start_char": 0,
+      "end_char": 25,
+      "emotion_score": 65.0,
+      "logic_score": 20.0,
+      "evidence_score": 15.0,
+      "local_diagnostics": []
+    }
+  ],
+  "input_text_length": 485,
+  "segment_count": 11,
+  "analysis_mode": "rule_only",
+  "llm_used": false
+}
